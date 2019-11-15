@@ -11,7 +11,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "movies", path = "movies")
 public interface PaperRepository extends Neo4jRepository<Paper, Long> {
 
-    Paper findByName(@Param("name") String name);
+    Paper findByName(@Param("name1") String name);
 
     Collection<Paper> findByAreaLike(@Param("area") Integer area);
 
