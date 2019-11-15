@@ -15,6 +15,7 @@ public interface PaperRepository extends Neo4jRepository<Paper, Long> {
 
     Collection<Paper> findByAreaLike(@Param("area") Integer area);
 
+    // comment test
     @Query("MATCH (a:author)-[r:first_author]->(p:paper) RETURN a,r,p LIMIT {limit}")
     Collection<Paper> graph(@Param("limit") int limit);
 }
