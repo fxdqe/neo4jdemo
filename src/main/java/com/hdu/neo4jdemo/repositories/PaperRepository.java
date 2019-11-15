@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface PaperRepository extends Neo4jRepository<Paper, Long> {
 
     Paper findByName(@Param("name1") String name);
-
+    Paper findAllBy(@Param("name2") String name);
     Collection<Paper> findByAreaLike(@Param("area") Integer area);
 
     // comment test
