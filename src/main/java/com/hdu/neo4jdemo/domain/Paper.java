@@ -1,13 +1,12 @@
 package com.hdu.neo4jdemo.domain;
 
-import java.util.*;
-
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.HashMap;
+import java.util.Map;
 
 @NodeEntity
 public class Paper {
@@ -98,36 +97,29 @@ public class Paper {
         return author4;
     }
 
-    public  List<Map<String, Object>> getAuthor(){
-        List<Map<String, Object>> authors = new ArrayList<>();
+    public  Map<String, Object> getAuthors(){
+        Map<String, Object> authors = new HashMap<>();
         // 1
         Author author = getAuthor1();
         if (author == null)
             return authors;
-        authors.add(map("name",author,"label","first_author"));
+        authors.put("first_author",author);
         // 2
         author = getAuthor2();
         if (author == null)
             return authors;
-        authors.add(map("name",author,"label","second_author"));
+        authors.put("second_author",author);
         // 3
         author = getAuthor3();
         if (author == null)
             return authors;
-        authors.add(map("name",author,"label","third_author"));
+        authors.put("third_author",author);
         // 4
         author = getAuthor4();
         if (author == null)
             return authors;
-        authors.add(map("name",author,"label","fourth_author"));
+        authors.put("fourth_author",author);
         return authors;
-    }
-
-    private Map<String, Object> map(String key1, Object value1, String key2, Object value2) {
-        Map<String, Object> result = new HashMap<String, Object>(2);
-        result.put(key1, value1);
-        result.put(key2, value2);
-        return result;
     }
 
 }

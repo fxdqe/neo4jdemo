@@ -1,14 +1,22 @@
 package com.hdu.neo4jdemo.services;
 
-import java.util.*;
-
-import com.hdu.neo4jdemo.domain.Author;
+import com.hdu.common.entity.RestfulResult;
 import com.hdu.neo4jdemo.domain.Paper;
 import com.hdu.neo4jdemo.repositories.PaperRepository;
+import org.neo4j.driver.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static org.neo4j.driver.Values.parameters;
+
+
+
 
 @Service
 public class PaperService {
@@ -20,6 +28,43 @@ public class PaperService {
         this.paperRepository = paperRepository;
     }
 
+    private Driver createDrive(){
+        return GraphDatabase.driver( "bolt://localhost:7687", AuthTokens.basic( "neo4j", "123456" ) );
+    }
+
+    @RequestMapping(value = "test")
+    public void test(HttpServletRequest request, HttpServletResponse response) {
+        RestfulResult restfulResult = new RestfulResult();
+
+        try{
+            Driver driver = createDrive();
+            Session session = driver.session();
+
+            session.run( "CREATE (a:Person {name: {name}, title: {title}})",
+                    parameters( "name", "Arthur001", "title", "King001" ) );
+
+            StatementResult result = session.run( "MATCH (a:Person) WHERE a.name = {name} " +
+                            "RETURN a.name AS name, a.title AS title",
+                    parameters( "name", "Arthur001" ) );
+
+            while ( result.hasNext() )
+            {
+                Record record = result.next();
+                System.out.println( record.get( "title" ).asString() + " " + record.get( "name" ).asString() + " " + record.get( "id" ).asString() );
+            }
+
+            session.close();
+            driver.close();
+
+        }catch(Exception e){
+            restfulResult.setResult(Constants.RESULT_STATE_ERROR);
+            restfulResult.setMessage(e.getMessage());
+        }
+
+        CommUtils.printDataJason(response, restfulResult);
+    }
+
+
     private Map<String, Object> toD3Format(Collection<Paper> papers) {
         List<Map<String, Object>> nodes = new ArrayList<>();
         List<Map<String, Object>> rels = new ArrayList<>();
@@ -30,14 +75,18 @@ public class PaperService {
             nodes.add(map("name", paper.getName(), "label", "paper"));
             int target = i;
             i++;
-            for (Map<String, Object> author : paper.getAuthor()) {
-                Map<String, Object> actor = map("title", author.getName(), "label", "actor");
-                int source = nodes.indexOf(actor);
-                if (source == -1) {
-                    nodes.add(actor);
-                    source = i++;
-                }
-                rels.add(map("source", source, "target", target));
+//            for (Map<String, Object> author : paper.getAuthors()) {
+//                Map<String, Object> actor = map("title", author.get("name"), "label", "actor");
+//                int source = nodes.indexOf(actor);
+//                if (source == -1) {
+//                    nodes.add(actor);
+//                    source = i++;
+//                }
+//                rels.add(map("source", source, "target", target));
+//            }
+
+            for(String key : paper.getAuthors().keySet()){
+
             }
         }
         return map("nodes", nodes, "links", rels);
