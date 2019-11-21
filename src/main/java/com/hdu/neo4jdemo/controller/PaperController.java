@@ -1,6 +1,6 @@
 package com.hdu.neo4jdemo.controller;
 
-import com.hdu.neo4jdemo.services.PaperService;
+import com.hdu.neo4jdemo.services.impl.PaperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.Map;
 public class PaperController {
 
     @Autowired
-    private final PaperService paperService;
+    private final PaperServiceImpl paperService;
 
-    public PaperController(PaperService paperService) {
+    public PaperController(PaperServiceImpl paperService) {
         this.paperService = paperService;
     }
 
