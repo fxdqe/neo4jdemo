@@ -3,14 +3,14 @@ package com.hdu.neo4jdemo.services;
 import com.hdu.neo4jdemo.domain.Paper;
 
 import java.util.Collection;
-import java.util.Map;
+import java.util.List;
 
 public interface PaperService{
 
-    Paper findByName(String name);
+    List<Paper> findByName1(String name, Integer limit);
 
     Collection<Paper> findByAreaLike(int area);
 
-    Map<String, Object> graph(int limit);
+    Collection<Paper> graph(int limit);
 
 }

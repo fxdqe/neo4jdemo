@@ -66,8 +66,9 @@ public class PaperServiceImpl implements PaperService {
 
 
     @Transactional(readOnly = true)
-    public Paper findByName(String name) {
-        Paper result = paperRepository.findByName(name);
+    public List<Paper> findByName1(String name, Integer limit) {
+        LOG.info("PSImpl"+ name+ limit);
+        List<Paper> result = paperRepository.findByName1(name,limit);
         return result;
     }
 
@@ -78,7 +79,7 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> graph(int limit) {
+    public Collection<Paper> graph(int limit) {
         Collection<Paper> result = paperRepository.graph(limit);
         return result;
     }

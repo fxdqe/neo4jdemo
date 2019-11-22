@@ -1,5 +1,7 @@
 package com.hdu.neo4jdemo.domain;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -7,6 +9,11 @@ import java.util.List;
 
 @NodeEntity
 public class Author {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String name;
     private Integer cnki_code;
     private Integer baidu_code;

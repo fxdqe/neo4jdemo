@@ -13,6 +13,8 @@ public class Unit {
 
     @Id
     @GeneratedValue
+    private Long id;
+
     private String name;
     private Integer type;
 

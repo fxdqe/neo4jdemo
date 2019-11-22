@@ -14,6 +14,7 @@ public class Paper {
     @Id
     @GeneratedValue
     private Integer id;
+
     private String paper_id;
     private String name;
     private String Abstract;
