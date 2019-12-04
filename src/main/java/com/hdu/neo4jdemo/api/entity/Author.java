@@ -1,5 +1,8 @@
-package com.hdu.neo4jdemo.domain;
+package com.hdu.neo4jdemo.api.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -7,7 +10,10 @@ import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.List;
 
-@NodeEntity
+@NodeEntity(label = "author")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
 
     @Id
@@ -30,31 +36,4 @@ public class Author {
     @Relationship(type = "fourth_author")
     private List<Paper> papers4;
 
-    public String getName() {
-        return name;
-    }
-
-    public Integer getCnki_code() {
-        return cnki_code;
-    }
-
-    public Integer getBaidu_code() {
-        return baidu_code;
-    }
-
-    public List<Paper> getPapers1() {
-        return papers1;
-    }
-
-    public List<Paper> getPapers2() {
-        return papers2;
-    }
-
-    public List<Paper> getPapers3() {
-        return papers3;
-    }
-
-    public List<Paper> getPapers4() {
-        return papers4;
-    }
 }
