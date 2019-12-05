@@ -1,4 +1,4 @@
-package com.hdu.neo4jdemo.api.entity;
+package com.hdu.neo4jdemo.api.entity.node;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
