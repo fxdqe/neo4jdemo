@@ -1,11 +1,13 @@
-package com.hdu.neo4jdemo.api.entity;
+package com.hdu.neo4jdemo.api.entity.relationship;
 
+import com.hdu.neo4jdemo.api.entity.node.Author;
+import com.hdu.neo4jdemo.api.entity.node.Paper;
 import org.neo4j.ogm.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Component
-@RelationshipEntity(type = "FOURTH_AUTHOR")
-public class FOURTHAUTHOR {
+@RelationshipEntity(type = "SECOND_AUTHOR")
+public class SECONDAUTHOR {
     @Id
     @GeneratedValue
     private Long id;

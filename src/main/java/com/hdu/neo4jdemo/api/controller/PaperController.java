@@ -1,6 +1,6 @@
 package com.hdu.neo4jdemo.api.controller;
 
-import com.hdu.neo4jdemo.api.entity.Paper;
+import com.hdu.neo4jdemo.api.entity.node.Paper;
 import com.hdu.neo4jdemo.api.repositories.PaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

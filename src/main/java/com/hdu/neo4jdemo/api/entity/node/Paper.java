@@ -1,4 +1,4 @@
-package com.hdu.neo4jdemo.api.entity;
+package com.hdu.neo4jdemo.api.entity.node;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
