@@ -1,13 +1,16 @@
 package com.hdu.neo4jdemo.api.controller;
 
+import com.hdu.neo4jdemo.api.entity.node.Author;
 import com.hdu.neo4jdemo.api.entity.node.Paper;
 import com.hdu.neo4jdemo.api.repositories.PaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,24 +29,68 @@ public class PaperController {
         return (List<Paper>) paperRepository.findAll();
     }
 
-    @GetMapping("/getPaper/{name}")
-    public Paper getPaper(@PathVariable String name) {
-        return paperRepository.findByName(name);
+    @GetMapping("/getPaper/name/{name}")
+    public Paper getByName(@PathVariable String name) {
+        return paperRepository.findOneByName(name);
     }
 
-    @GetMapping("/getHello/{hi}")
-    public String getHello(@PathVariable String hi){
-        return "Hello, "+ hi;
+    //模糊查询
+    @GetMapping("/getPaper/fname/{name}")
+    public Paper fuzzyGetByName(@PathVariable String name) {
+        name = "*" + name + "*";
+        return paperRepository.findByNameLike(name);
     }
 
-//    @RequestMapping("/graph")
-//    public Collection<Paper> graph(@RequestParam(value = "limit",required = false) Integer limit) {
-//        return paperService.graph(limit == null ? 100 : limit);
-//    }
-//
-////    @RequestMapping("/name1/{name}/{limit}")
-//    @RequestMapping({"/name1/{name1}/{limit}","/name1/{name1}"})
-//    public String findByName1(@PathVariable(value = "name1") String name1,@PathVariable(value = "limit",required = false) Integer limit){
-//        return paperService.findByName1(name1, limit == null ? 20 : limit).toString();
-//    }
+    //模糊查询
+    @GetMapping("/getPaper/classification/{classification}")
+    public List<Paper> fuzzyGetByClassification(@PathVariable String classification) {
+        classification = "*" + classification + "*";
+        return paperRepository.findByClassificationLike(classification);
+    }
+
+
+    /*
+     *  论文名字查询作者
+     */
+    @GetMapping("/getAuthor1/name/{name}")
+    public Author getAuthor1(@PathVariable String name) {
+        return paperRepository.findAuthor1ByName(name);
+    }
+
+    @GetMapping("/getAuthor2/name/{name}")
+    public Author getAuthor2(@PathVariable String name) {
+        return paperRepository.findAuthor2ByName(name);
+    }
+
+    @GetMapping("/getAuthor3/name/{name}")
+    public Author getAuthor3(@PathVariable String name) {
+        return paperRepository.findAuthor3ByName(name);
+    }
+
+    @GetMapping("/getAuthor4/name/{name}")
+    public Author getAuthor4(@PathVariable String name) {
+        return paperRepository.findAuthor4ByName(name);
+    }
+
+    @GetMapping("/getAuthors/name/{name}")
+    public List<Author> getAuthors(@PathVariable String name) {
+        ArrayList<Author> authors = new ArrayList<>();
+        Author author = getAuthor1(name);
+        if (!StringUtils.isEmpty(author)) {
+            authors.add(author);
+            author = getAuthor2(name);
+            if (!StringUtils.isEmpty(author)) {
+                authors.add(author);
+                author = getAuthor3(name);
+                if (!StringUtils.isEmpty(author)) {
+                    authors.add(author);
+                    author = getAuthor4(name);
+                    if (!StringUtils.isEmpty(author)) {
+                        authors.add(author);
+                    }
+                }
+            }
+        }
+        return authors;
+    }
 }
