@@ -4,7 +4,6 @@ import com.hdu.neo4jdemo.api.entity.node.Author;
 import com.hdu.neo4jdemo.api.entity.node.Paper;
 import com.hdu.neo4jdemo.api.repositories.PaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,22 +74,15 @@ public class PaperController {
     @GetMapping("/getAuthors/name/{name}")
     public List<Author> getAuthors(@PathVariable String name) {
         ArrayList<Author> authors = new ArrayList<>();
-        Author author = getAuthor1(name);
-        if (!StringUtils.isEmpty(author)) {
-            authors.add(author);
-            author = getAuthor2(name);
-            if (!StringUtils.isEmpty(author)) {
-                authors.add(author);
-                author = getAuthor3(name);
-                if (!StringUtils.isEmpty(author)) {
-                    authors.add(author);
-                    author = getAuthor4(name);
-                    if (!StringUtils.isEmpty(author)) {
-                        authors.add(author);
-                    }
-                }
-            }
-        }
+        authors.add(getAuthor1(name));
+        authors.add(getAuthor2(name));
+        authors.add(getAuthor3(name));
+        authors.add(getAuthor4(name));
+        authors.add(null);
+        // 去除null项
+        List<String> list = new ArrayList<>();
+        list.add(null);
+        authors.removeAll(list);
         return authors;
     }
 }
