@@ -29,6 +29,7 @@ public class Paper {
     private String url;
     private String unit;
     private String unit_type;
+    private String keywords;
 
     @JsonIgnore
     @Relationship(type = "is")

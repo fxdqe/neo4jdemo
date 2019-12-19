@@ -2,6 +2,7 @@ package com.hdu.neo4jdemo.api.controller;
 
 import com.hdu.neo4jdemo.api.entity.node.Author;
 import com.hdu.neo4jdemo.api.entity.node.Paper;
+import com.hdu.neo4jdemo.api.repositories.AuthorRepository;
 import com.hdu.neo4jdemo.api.repositories.PaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,25 @@ public class PaperController {
     @Autowired
     private final PaperRepository paperRepository;
 
+    @Autowired
+    private final AuthorRepository authorRepository;
+
     public PaperController(PaperRepository paperRepository) {
+        this.authorRepository = null;
         this.paperRepository = paperRepository;
     }
+
+    public PaperController(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
+        this.paperRepository = null;
+    }
+
+    public PaperController(PaperRepository paperRepository, AuthorRepository authorRepository) {
+        this.paperRepository = paperRepository;
+        this.authorRepository = authorRepository;
+    }
+
+
 
     @GetMapping("/getPapers")
     public List<Paper> getPapers() {
@@ -53,22 +70,22 @@ public class PaperController {
      */
     @GetMapping("/getAuthor1/name/{name}")
     public Author getAuthor1(@PathVariable String name) {
-        return paperRepository.findAuthor1ByName(name);
+        return authorRepository.findAuthor1ByName(name);
     }
 
     @GetMapping("/getAuthor2/name/{name}")
     public Author getAuthor2(@PathVariable String name) {
-        return paperRepository.findAuthor2ByName(name);
+        return authorRepository.findAuthor2ByName(name);
     }
 
     @GetMapping("/getAuthor3/name/{name}")
     public Author getAuthor3(@PathVariable String name) {
-        return paperRepository.findAuthor3ByName(name);
+        return authorRepository.findAuthor3ByName(name);
     }
 
     @GetMapping("/getAuthor4/name/{name}")
     public Author getAuthor4(@PathVariable String name) {
-        return paperRepository.findAuthor4ByName(name);
+        return authorRepository.findAuthor4ByName(name);
     }
 
     @GetMapping("/getAuthors/name/{name}")
