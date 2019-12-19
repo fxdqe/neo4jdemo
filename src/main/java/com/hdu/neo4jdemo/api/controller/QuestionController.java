@@ -19,4 +19,9 @@ public class QuestionController {
     public String hanlptest(@PathVariable String question) {
         return questionServiceImpl.hanlptest(question);
     }
+
+    @GetMapping("/answer/{question}")
+    public String answer(@PathVariable String question) {
+        return questionServiceImpl.answer(question);
+    }
 }
