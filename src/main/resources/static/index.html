@@ -1,0 +1,851 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Slek - Chat and Discussion Platform</title>
+
+    <!-- Favicon -->
+    <link href="./dist/media/img/favicon.png" rel="icon" type="image/png">
+
+    <!-- Bundle Styles -->
+    <link href="./vendor/bundle.css" rel="stylesheet">
+
+    <link href="./vendor/enjoyhint/enjoyhint.css" rel="stylesheet">
+
+    <!-- App styles -->
+    <link href="./dist/css/app.min.css" rel="stylesheet">
+  </head>
+<body>
+
+<!-- page loading -->
+<div class="page-loading"></div>
+<!-- ./ page loading -->
+
+<!-- page tour modal -->
+<div aria-hidden="true" class="modal fade" id="pageTour" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-zoom" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center pt-5">
+        <div class="row">
+          <div class="col-md-6 offset-3">
+            <figure>
+              <img alt="image" class="img-fluid" src="dist/media/svg/undraw_product_tour_foyt.svg">
+            </figure>
+            <p class="lead mt-5">欢迎使用Cortana。</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <td>
+          <button class="btn btn-primary start-tour" type="button">引 导</button>
+        </td>
+        <td width="50px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          <button aria-label="Close" class="btn btn-link" data-dismiss="modal" type="button">关 闭</button>
+        </td>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ./ page tour modal -->
+
+<!-- disconnected modal -->
+
+<!-- ./ disconnected modal -->
+
+<!-- voice call modal -->
+
+<!-- ./ voice call modal -->
+
+<!-- voice call modal -->
+
+<!-- ./ voice call modal -->
+
+<!-- add friends modal -->
+
+<!-- ./ add friends modal -->
+
+<!-- new group modal -->
+
+<!-- ./ new group modal -->
+
+<!-- setting modal -->
+
+<!-- ./ setting modal -->
+
+<!-- edit profile modal -->
+<!-- ./ edit profile modal -->
+
+<!-- layout -->
+<div class="layout">
+
+  <!-- navigation -->
+  <nav class="navigation">
+    <div class="nav-group">
+      <ul>
+        <li class="logo">
+          <a href="#">
+            <svg height="612px" style="enable-background:new 0 0 612 612;"
+                 version="1.1" viewBox="0 0 612 612"
+                 width="612px" x="0px" xml:space="preserve"
+                 xmlns="http://www.w3.org/2000/svg" y="0px">
+                            <g>
+                                <g id="_x32__26_">
+                                    <g>
+                                    <path d="M401.625,325.125h-191.25c-10.557,0-19.125,8.568-19.125,19.125s8.568,19.125,19.125,19.125h191.25
+                                    c10.557,0,19.125-8.568,19.125-19.125S412.182,325.125,401.625,325.125z M439.875,210.375h-267.75
+                                    c-10.557,0-19.125,8.568-19.125,19.125s8.568,19.125,19.125,19.125h267.75c10.557,0,19.125-8.568,19.125-19.125
+                                    S450.432,210.375,439.875,210.375z M306,0C137.012,0,0,119.875,0,267.75c0,84.514,44.848,159.751,114.75,208.826V612
+                                    l134.047-81.339c18.552,3.061,37.638,4.839,57.203,4.839c169.008,0,306-119.875,306-267.75C612,119.875,475.008,0,306,0z
+                                    M306,497.25c-22.338,0-43.911-2.601-64.643-7.019l-90.041,54.123l1.205-88.701C83.5,414.133,38.25,345.513,38.25,267.75
+                                    c0-126.741,119.875-229.5,267.75-229.5c147.875,0,267.75,102.759,267.75,229.5S453.875,497.25,306,497.25z"/>
+                                    </g>
+                                </g>
+                            </g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+                        </svg>
+          </a>
+        </li>
+        <li>
+          <a class="active" data-navigation-target="chats" data-placement="right" data-toggle="tooltip" href="#"
+             title="Chats">
+            <span class="badge badge-warning"></span>
+            <i data-feather="message-circle"></i>
+          </a>
+        </li>
+        <li>
+          <a data-navigation-target="friends" data-placement="right" data-toggle="tooltip"
+             href="#" title="Friends">
+            <span class="badge badge-danger"></span>
+            <i data-feather="user"></i>
+          </a>
+        </li>
+        <li>
+          <a data-navigation-target="References" data-placement="right" data-toggle="tooltip" href="#"
+             title="References">
+            <i data-feather="star"></i>
+          </a>
+        </li>
+        <li class="brackets">
+
+        </li>
+        <li>
+          <a class="dark-light-switcher" data-placement="right" data-target="#Darkmode" data-toggle="tooltip"
+             href="#" title="Dark mode">
+            <i data-feather="moon"></i>
+          </a>
+        </li>
+        <li data-placement="right" data-target="#Usermenu" data-toggle="tooltip" title="User menu">
+
+          <figure class="avatar">
+            <img alt="image" class="rounded-circle" src="./dist/media/img/User.jpg">
+          </figure>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" data-navigation-target="contact-information" href="#">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#">Back</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- ./ navigation -->
+
+  <!-- content -->
+  <div class="content">
+
+    <!-- sidebar group -->
+    <div class="sidebar-group">
+
+      <!-- Chats sidebar -->
+      <div class="sidebar active" id="chats">
+        <header>
+          <span>Chats</span>
+          <ul class="list-inline">
+
+            <li class="list-inline-item d-xl-none d-inline">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+
+          </ul>
+        </header>
+        <form>
+          <input class="form-control" placeholder="Search chats" type="text">
+        </form>
+        <div class="sidebar-body">
+          <ul class="list-group list-group-flush">
+
+
+            <li class="list-group-item open-chat">
+              <div>
+                <figure class="avatar">
+                  <img alt="image" class="rounded-circle" src="./dist/media/img/cortana.jpg">
+                </figure>
+              </div>
+              <div class="users-list-body">
+                <div>
+                  <h5>Cortana</h5>
+                  <p>晚上好... </p>
+                </div>
+                <div class="users-list-action">
+                  <small class="text-muted">Now</small>
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+
+                        <a class="dropdown-item" data-navigation-target="contact-information03"
+                           href="#">Profile</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+      <!-- ./ Chats sidebar -->
+
+      <!-- Friends sidebar -->
+      <div class="sidebar" id="friends">
+        <header>
+          <span>Friends</span>
+          <ul class="list-inline">
+
+            <li class="list-inline-item d-xl-none d-inline">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <form>
+          <input class="form-control" placeholder="Search friends" type="text">
+        </form>
+        <div class="sidebar-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div>
+                <figure class="avatar">
+                  <img alt="image" class="rounded-circle" src="./dist/media/img/User.jpg">
+                </figure>
+              </div>
+              <div class="users-list-body">
+                <div>
+                  <h5>User </h5>
+                  <p></p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+
+                        <a class="dropdown-item" data-navigation-target="contact-information"
+                           href="#">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <figure class="avatar avatar-state-warning">
+                  <img alt="image" class="rounded-circle" src="./dist/media/img/friend01.png">
+                </figure>
+              </div>
+              <div class="users-list-body">
+                <div>
+                  <h5>黄子林</h5>
+                  <p>1037852407@qq.com</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+
+                        <a class="dropdown-item" data-navigation-target="contact-information01"
+                           href="#">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>
+                <figure class="avatar avatar-state-success">
+                  <img alt="image" class="rounded-circle" src="./dist/media/img/friend02.jpg">
+                </figure>
+              </div>
+              <div class="users-list-body">
+                <div>
+                  <h5>易雪强</h5>
+                  <p>1004201193@qq.com</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+
+                        <a class="dropdown-item" data-navigation-target="contact-information02"
+                           href="#">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <!-- ./ Friends sidebar -->
+
+      <!-- References sidebar -->
+      <div class="sidebar" id="References">
+        <header>
+          <span>References</span>
+          <ul class="list-inline">
+            <li class="list-inline-item d-xl-none d-inline">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <form>
+          <input class="form-control" placeholder="Search References" type="text">
+        </form>
+        <div class="sidebar-body">
+          <ul class="list-group list-group-flush users-list">
+            <li class="list-group-item">
+              <div class="users-list-body">
+                <div>
+                  <h5>中国知网</h5>
+                  <p>知网，是国家知识基础设施的概念，由世界...</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="https://www.cnki.net/" target="_blank">Open</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+            <li class="list-group-item">
+              <div class="users-list-body">
+                <div>
+                  <h5>Project Github</h5>
+                  <p>我们的GitHub项目地址...</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="https://github.com/fxdqe/neo4jdemo" target="_blank">Open</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+            <li class="list-group-item">
+              <div class="users-list-body">
+                <div>
+                  <h5> HanLP 参考资料</h5>
+                  <p>感谢这个Hanlp例子...</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="https://github.com/hankcs/HanLP" target="_blank">Open</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+            <li class="list-group-item">
+              <div class="users-list-body">
+                <div>
+                  <h5> Springboot 参考资料</h5>
+                  <p>感谢这个Springboot例子...</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="https://github.com/kobeyk/Spring-Boot-Neo4j-Movies"
+                           target="_blank">Open</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Back</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+      <!-- ./ Stars sidebar -->
+
+      <!-- Archived sidebar -->
+      <div class="sidebar" id="archived">
+        <header>
+          <span>Archived</span>
+          <ul class="list-inline">
+            <li class="list-inline-item d-xl-none d-inline">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <form>
+          <input class="form-control" placeholder="Search archived" type="text">
+        </form>
+        <div class="sidebar-body">
+          <ul class="list-group list-group-flush users-list">
+            <li class="list-group-item">
+              <figure class="avatar">
+                <span class="avatar-title bg-danger rounded-circle">M</span>
+              </figure>
+              <div class="users-list-body">
+                <div>
+                  <h5>Mercedes Pllu</h5>
+                  <p>I know how important this file is to you. You can trust me ;)</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Open</a>
+                        <a class="dropdown-item" href="#">Restore</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <figure class="avatar">
+                <span class="avatar-title bg-secondary rounded-circle">R</span>
+              </figure>
+              <div class="users-list-body">
+                <div>
+                  <h5>Rochelle Golley</h5>
+                  <p>Lorem ipsum dolor sitsdc sdcsdc sdcsdcs</p>
+                </div>
+                <div class="users-list-action">
+                  <div class="action-toggle">
+                    <div class="dropdown">
+                      <a data-toggle="dropdown" href="#">
+                        <i data-feather="more-horizontal"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Open</a>
+                        <a class="dropdown-item" href="#">Restore</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- ./ Archived sidebar -->
+
+    </div>
+    <!-- ./ sidebar group -->
+
+    <!-- chat -->
+    <div class="chat">
+      <div class="chat-header">
+        <div class="chat-header-user">
+          <figure class="avatar">
+            <img alt="image" class="rounded-circle" src="./dist/media/img/cortana.jpg">
+          </figure>
+          <div>
+            <h5>Cortana</h5>
+            <small class="text-success">
+              <i>waiting for question...</i>
+            </small>
+          </div>
+        </div>
+        <div class="chat-header-action">
+          <ul class="list-inline">
+            <li class="list-inline-item d-xl-none d-inline">
+              <a class="btn btn-outline-light mobile-navigation-button" href="#">
+                <i data-feather="menu"></i>
+              </a>
+            </li>
+
+            <li class="list-inline-item" data-target="#card">
+              <a class="btn btn-outline-light" data-toggle="dropdown" href="#">
+                <i data-feather="more-horizontal"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" data-navigation-target="contact-information03"
+                   href="#">Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="#">Back</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="chat-body"> <!-- .no-message -->
+
+        <!-- 这里要留一个messages索引-->
+        <div class="messages"></div>
+      </div>
+      <div class="chat-footer">
+        <form data-target="#write">
+          <div>
+            <button class="btn btn-light mr-3" data-toggle="tooltip" title="Emoji" type="button">
+              <i data-feather="smile"></i>
+            </button>
+          </div>
+          <input class="form-control" id="text" placeholder="Write a message." type="text">
+          <div class="form-buttons">
+            <button class="btn btn-light" data-toggle="tooltip" title="Add files" type="button">
+              <i data-feather="paperclip"></i>
+            </button>
+            <button class="btn btn-light d-sm-none d-block" data-toggle="tooltip"
+                    title="Send a voice record" type="button">
+              <i data-feather="mic"></i>
+            </button>
+            <button class="btn btn-primary" type="submit">
+              <i data-feather="send"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ./ chat -->
+
+    <div class="sidebar-group">
+      <div class="sidebar" id="contact-information">
+        <header>
+          <span>Profile</span>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <div class="sidebar-body">
+          <div class="pl-4 pr-4">
+            <div class="text-center">
+              <figure class="avatar avatar-xl mb-4">
+                <img alt="image" class="rounded-circle" src="./dist/media/img/User.jpg">
+              </figure>
+              <h5 class="mb-1">User </h5>
+              <small class="text-muted font-italic">Last seen: Today</small>
+
+              <ul class="nav nav-tabs justify-content-center mt-5" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home"
+                     id="home-tab" role="tab">About</a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content" id="myTabContent">
+              <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home" role="tabpanel">
+                <p class="text-muted">这是您自己。</p>
+                <div class="mt-4 mb-4">
+                  <h6>联系方式</h6>
+                  <p class="text-muted"></p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>组织</h6>
+                  <p class="text-muted">hdu</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>爱好</h6>
+                  <p>
+                    <a href="#"</a>
+                  </p>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="sidebar" id="contact-information01">
+        <header>
+          <span>Profile</span>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <div class="sidebar-body">
+          <div class="pl-4 pr-4">
+            <div class="text-center">
+              <figure class="avatar avatar-xl mb-4">
+                <img alt="image" class="rounded-circle" src="./dist/media/img/friend01.png">
+              </figure>
+              <h5 class="mb-1">黄子林</h5>
+              <small class="text-muted font-italic">Last seen: Today</small>
+
+              <ul class="nav nav-tabs justify-content-center mt-5" id="myTab01" role="tablist">
+                <li class="nav-item">
+                  <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home"
+                     id="home-tab01" role="tab">About</a>
+                </li>
+
+              </ul>
+            </div>
+            <div class="tab-content" id="myTabContent01">
+              <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home01" role="tabpanel">
+                <p class="text-muted">隐藏boss。</p>
+                <div class="mt-4 mb-4">
+                  <h6>联系方式</h6>
+                  <p class="text-muted">huangzilin@awa.com</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>组织</h6>
+                  <p class="text-muted">Dark Union</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>爱好</h6>
+                  <p>
+                    <a href="#">爆杀王</a>
+                  </p>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="sidebar" id="contact-information02">
+        <header>
+          <span>Profile</span>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <div class="sidebar-body">
+          <div class="pl-4 pr-4">
+            <div class="text-center">
+              <figure class="avatar avatar-xl mb-4">
+                <img alt="image" class="rounded-circle" src="./dist/media/img/friend02.jpg">
+              </figure>
+              <h5 class="mb-1">易雪强</h5>
+              <small class="text-muted font-italic">Last seen: Today</small>
+
+              <ul class="nav nav-tabs justify-content-center mt-5" id="myTab02" role="tablist">
+                <li class="nav-item">
+                  <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home"
+                     id="home-tab02" role="tab">About</a>
+                </li>
+
+              </ul>
+            </div>
+            <div class="tab-content" id="myTabContent02">
+              <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home02" role="tabpanel">
+                <p class="text-muted">灭世的魔法师。</p>
+                <div class="mt-4 mb-4">
+                  <h6>联系方式</h6>
+                  <p class="text-muted">原地转三圈，然后大喊“假面骑士救救我”</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>组织</h6>
+                  <p class="text-muted">Dark Union</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>爱好</h6>
+                  <p>
+                    <a href="#">奶牛猫</a>
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="sidebar" id="contact-information03">
+        <header>
+          <span>Profile</span>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light text-danger sidebar-close" href="#">
+                <i data-feather="x"></i>
+              </a>
+            </li>
+          </ul>
+        </header>
+        <div class="sidebar-body">
+          <div class="pl-4 pr-4">
+            <div class="text-center">
+              <figure class="avatar avatar-xl mb-4">
+                <img alt="image" class="rounded-circle" src="./dist/media/img/cortana.jpg">
+              </figure>
+              <h5 class="mb-1">Cortana</h5>
+              <small class="text-muted font-italic">Last seen: Today</small>
+
+              <ul class="nav nav-tabs justify-content-center mt-5" id="myTab03" role="tablist">
+                <li class="nav-item">
+                  <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home"
+                     id="home-tab03" role="tab">About</a>
+                </li>
+
+              </ul>
+            </div>
+            <div class="tab-content" id="myTabContent03">
+              <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home03" role="tabpanel">
+                <p class="text-muted">Cortana是个有礼貌的孩子。</p>
+                <div class="mt-4 mb-4">
+                  <h6>联系方式</h6>
+                  <p class="text-muted">机密</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>组织</h6>
+                  <p class="text-muted">Dark Union</p>
+                </div>
+                <div class="mt-4 mb-4">
+                  <h6>爱好</h6>
+                  <p>
+                    <a href="#">牧羊犬</a>
+                  </p>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+  <!-- ./ content -->
+
+</div>
+<!-- ./ layout -->
+
+<!-- Bundle -->
+<script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script>
+<script src="./vendor/bundle.js"></script>
+<script src="./vendor/feather.min.js"></script>
+<script src="./vendor/enjoyhint/enjoyhint.min.js"></script>
+
+<!-- App scripts -->
+<script src="./dist/js/app.min.js"></script>
+
+<!-- Examples -->
+<script src="./dist/js/examples.js"></script>
+</body>
+</html>
