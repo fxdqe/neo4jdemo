@@ -8,12 +8,11 @@ import com.hdu.neo4jdemo.api.repositories.AuthorRepository;
 import com.hdu.neo4jdemo.api.repositories.JournalRepository;
 import com.hdu.neo4jdemo.api.repositories.PaperRepository;
 import com.hdu.neo4jdemo.api.services.QuestionService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -43,6 +42,7 @@ public class QuestionServiceImpl implements QuestionService {
         return segs.toString();
     }
 
+    //    public String answer(String question) throws NumberFormatException{
     public String answer(String question) {
         QuestionProcess questionProcess = new QuestionProcess();
         ArrayList<String> reStrings = (ArrayList<String>) questionProcess.analyQuery(question);
@@ -69,9 +69,9 @@ public class QuestionServiceImpl implements QuestionService {
                 if (authorNames != null) {
                     ListIterator<String> lit = authorNames.listIterator();
                     while (lit.hasNext()) {
-                        lit.next();
+                        String res = lit.next();
                         if (count == 0)
-                            answer.append(lit);
+                            answer.append(res);
                         else
                             answer.append(" ,").append(lit);
                         count++;
@@ -113,11 +113,11 @@ public class QuestionServiceImpl implements QuestionService {
                 if (paperNames != null) {
                     ListIterator<String> lit = paperNames.listIterator();
                     while (lit.hasNext()) {
-                        lit.next();
+                        String res = lit.next();
                         if (count == 0)
-                            answer.append(lit);
+                            answer.append(res);
                         else
-                            answer.append(" ,").append(lit);
+                            answer.append(" ,").append(res);
                         count++;
                     }
                 }
@@ -193,11 +193,11 @@ public class QuestionServiceImpl implements QuestionService {
                 if (journalNames != null) {
                     ListIterator<String> lit = journalNames.listIterator();
                     while (lit.hasNext()) {
-                        lit.next();
+                        String res = lit.next();
                         if (count == 0)
-                            answer.append(lit);
+                            answer.append(res);
                         else
-                            answer.append(" ;").append(lit);
+                            answer.append(" ;").append(res);
                         count++;
                     }
                 }
@@ -209,11 +209,11 @@ public class QuestionServiceImpl implements QuestionService {
                 if (journalNames != null) {
                     ListIterator<String> lit = journalNames.listIterator();
                     while (lit.hasNext()) {
-                        lit.next();
+                        String res = lit.next();
                         if (count == 0)
-                            answer.append(lit);
+                            answer.append(res);
                         else
-                            answer.append(" ;").append(lit);
+                            answer.append(" ;").append(res);
                         count++;
                     }
                 }
@@ -231,8 +231,12 @@ public class QuestionServiceImpl implements QuestionService {
 
         String finalAnswer = answer.toString();
         System.out.println(finalAnswer);
-        if (!finalAnswer.equals("") && !finalAnswer.equals("\\N")) {
-            return finalAnswer;
+        if (!finalAnswer.equals("") && !finalAnswer.equals("\n")) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("result", finalAnswer);
+            String js = JSONObject.toJSONString(map);
+            System.out.println(js);
+            return js;
         } else {
             return "sorry,我没有找到你要的答案";
         }

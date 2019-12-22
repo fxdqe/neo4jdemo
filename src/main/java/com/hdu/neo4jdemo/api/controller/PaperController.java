@@ -23,22 +23,10 @@ public class PaperController {
     @Autowired
     private final AuthorRepository authorRepository;
 
-    public PaperController(PaperRepository paperRepository) {
-        this.authorRepository = null;
-        this.paperRepository = paperRepository;
-    }
-
-    public PaperController(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-        this.paperRepository = null;
-    }
-
     public PaperController(PaperRepository paperRepository, AuthorRepository authorRepository) {
         this.paperRepository = paperRepository;
         this.authorRepository = authorRepository;
     }
-
-
 
     @GetMapping("/getPapers")
     public List<Paper> getPapers() {

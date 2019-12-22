@@ -26,19 +26,19 @@ public interface AuthorRepository extends Neo4jRepository<Author, Long> {
     @Query("MATCH (a:author)-[r:FOURTH_AUTHOR]->(p:paper) WHERE p.name= {name} RETURN a")
     Author findAuthor4ByName(@Param("name") String name);
 
-    @Query("MATCH (a:author)-[r]->(p:paper) WHERE paper.pid = {id} RETURN a.name")
+    @Query("MATCH (a:author)-[r]->(p:paper) WHERE p.pid = {id} RETURN a.name")
     List<String> findNamesByPaperId(@Param("id") Integer id);
 
-    @Query("MATCH (a:author)-[r:FIRST_AUTHOR]->(p:paper) WHERE paper.pid = {id} RETURN a.name LIMIT 1")
+    @Query("MATCH (a:author)-[r:FIRST_AUTHOR]->(p:paper) WHERE p.pid = {id} RETURN a.name LIMIT 1")
     String findFIRSTByPaperId(@Param("id") Integer id);
 
-    @Query("MATCH (a:author)-[r:SECOND_AUTHOR]->(p:paper) WHERE paper.pid = {id} RETURN a.name LIMIT 1")
+    @Query("MATCH (a:author)-[r:SECOND_AUTHOR]->(p:paper) WHERE p.pid = {id} RETURN a.name LIMIT 1")
     String findSECONDByPaperId(@Param("id") Integer id);
 
-    @Query("MATCH (a:author)-[r:THIRD_AUTHOR]->(p:paper) WHERE paper.pid = {id} RETURN a.name LIMIT 1")
+    @Query("MATCH (a:author)-[r:THIRD_AUTHOR]->(p:paper) WHERE p.pid = {id} RETURN a.name LIMIT 1")
     String findTHIRDByPaperId(@Param("id") Integer id);
 
-    @Query("MATCH (a:author)-[r:FOURTH_AUTHOR]->(p:paper) WHERE paper.pid = {id} RETURN a.name LIMIT 1")
+    @Query("MATCH (a:author)-[r:FOURTH_AUTHOR]->(p:paper) WHERE p.pid = {id} RETURN a.name LIMIT 1")
     String findFOURTHByPaperId(@Param("id") Integer id);
 
     @Query("MATCH (a:author) WHERE a.cnki_code = {id} RETURN a.name LIMIT 1")

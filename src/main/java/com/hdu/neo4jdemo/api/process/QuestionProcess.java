@@ -85,6 +85,7 @@ public class QuestionProcess {
 
     private String queryAbstract(String text) {
         List<Term> terms = querySeg(text);
+        System.out.println("句子分析词性结果：" + terms);
         StringBuilder abstractQuery = new StringBuilder();
         abstractMap = new HashMap<>();
         for (Term term : terms) {
@@ -115,7 +116,7 @@ public class QuestionProcess {
 
     public Map<String, Integer> loadVocabulary() {
         vocabulary = new HashMap<>();
-        File file = new File("question/vocabulary.txt");
+        File file = new File("./src/main/resources/question/vocabulary.txt");
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
@@ -361,7 +362,7 @@ public class QuestionProcess {
     // 加载问题模板分类器标签
     private Map<Double, String> loadQuestionsPattern() {
         questionsPattern = new HashMap<>();
-        File file = new File("question/question_classification.txt");
+        File file = new File("./src/main/resources/question/question_classification.txt");
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
@@ -370,7 +371,7 @@ public class QuestionProcess {
                 String pattern = tokens[1];
                 questionsPattern.put(index, pattern);
             }
-        } catch (NumberFormatException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return questionsPattern;
