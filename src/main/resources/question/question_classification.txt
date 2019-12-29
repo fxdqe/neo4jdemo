@@ -5,11 +5,17 @@
 4:m 第四作者
 5:nr 论文
 6:nnt ng 电影作品
-7:nnt 电影作品
-8:nnt 参演评分 大于 x
-9:nnt 参演评分 小于 x
-10:nnt 电影类型
-11:nnt nnr 合作 电影列表
+7:title id
+8:title 概要
+9:m 概要
+10:m url
+11:title url
 12:m 名字
-13:nnt 出生日期
+13:nr id
+14:nr 组织
+15:m 组织
 16:nr 组织
+17:m 报刊
+18:nr 报刊
+19:title 报刊
+20:jr url

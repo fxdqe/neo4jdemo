@@ -1,6 +1,7 @@
 package com.hdu.neo4jdemo.api.process;
 
 import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.dictionary.CustomDictionary;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
 import org.apache.spark.SparkConf;
@@ -66,8 +67,8 @@ public class QuestionProcess {
         System.out.println("句子套用模板结果：" + strPatt);
 
         // 模板还原成句子
-        String finalPattern = queryExtenstion(strPatt);
-        System.out.println("原始句子替换成系统可识别的结果：" + finalPattern);// 但丁密码 制作 导演列表
+        String finalPattern = queryExtension(strPatt);
+        System.out.println("原始句子替换成系统可识别的结果：" + finalPattern);
 
         ArrayList<String> resultList = new ArrayList<>();
         resultList.add(String.valueOf(modelIndex));
@@ -80,10 +81,14 @@ public class QuestionProcess {
         Segment segment = HanLP.newSegment();
         segment.enableOffset(true);
         segment.enableCustomDictionary(true);
+        CustomDictionary.add("第三", "mq 2000");
+        CustomDictionary.add("第四", "mq 2000");
         return segment.seg(text);
     }
 
     private String queryAbstract(String text) {
+        StringBuilder title = new StringBuilder();
+        int flag = 0;
         List<Term> terms = querySeg(text);
         System.out.println("句子分析词性结果：" + terms);
         StringBuilder abstractQuery = new StringBuilder();
@@ -91,7 +96,9 @@ public class QuestionProcess {
         for (Term term : terms) {
             String word = term.word;
             String nature = term.nature.toString();
-            if (nature.equals("m")) {        //m 数词（数字）
+            if (flag == 1 && !(word.equals(">") || word.equals("》"))) {
+                title.append(word);
+            } else if (nature.equals("m")) {        //m 数词（数字）
                 abstractQuery.append("m ");
                 abstractMap.put("m", word);
             } else if (nature.equals("nr")) {    //nr 人名
@@ -106,6 +113,14 @@ public class QuestionProcess {
             } else if (nature.equals("jr")) { //jr 期刊journal
                 abstractQuery.append("jr ");
                 abstractMap.put("jr", word);
+            } else if (word.equals("<") || word.equals("《")) {
+                flag = 1;
+                abstractQuery.append(word);
+            } else if (flag == 1 && (word.equals(">") || word.equals("》"))) {
+                flag = 0;
+                abstractMap.put("title", title.toString());
+                System.out.println(title.toString());
+                abstractQuery.append("title").append(word).append(" ");
             } else {
                 abstractQuery.append(word).append(" ");
             }
@@ -342,9 +357,10 @@ public class QuestionProcess {
     }
 
     // 句子还原
-    private String queryExtenstion(String queryPattern) {
+    private String queryExtension(String queryPattern) {
         Set<String> set = abstractMap.keySet();
         for (String key : set) {
+            System.out.println(key + " ");
             // 如果句子模板中含有抽象的词性
             if (queryPattern.contains(key)) {
                 //则替换抽象词性为具体的值

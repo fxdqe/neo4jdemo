@@ -46,4 +46,7 @@ public interface PaperRepository extends Neo4jRepository<Paper, Long> {
 
     @Query("MATCH (p:paper)-[r:RELEASED_ON]->(j:journal) WHERE p.pid = {id} RETURN j.name + ' ,' + j.no LIMIT 1")
     String findJournalNameById(@Param("id") Integer paperId);
+
+    @Query("MATCH (p:paper) WHERE p.name = {title} RETURN p.url LIMIT 1")
+    String findUrlByTitle(@Param("title") String title);
 }

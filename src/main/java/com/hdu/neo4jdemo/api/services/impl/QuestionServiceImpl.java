@@ -48,6 +48,7 @@ public class QuestionServiceImpl implements QuestionService {
         ArrayList<String> reStrings = (ArrayList<String>) questionProcess.analyQuery(question);
         int modelIndex = Integer.parseInt(reStrings.get(0));
         StringBuilder answer = new StringBuilder();
+        StringBuilder title = new StringBuilder();
         String authorName;
         List<String> authorNames;
         List<String> paperNames;
@@ -60,6 +61,8 @@ public class QuestionServiceImpl implements QuestionService {
         String organization;
         String journalName;
         int count = 0;
+        int i = 0;
+        int type = 0;
         // 匹配问题模板
         switch (modelIndex) {
             case 0:
@@ -68,12 +71,15 @@ public class QuestionServiceImpl implements QuestionService {
                 authorNames = authorRepository.findNamesByPaperId(paperId);
                 if (authorNames != null) {
                     ListIterator<String> lit = authorNames.listIterator();
+                    count = authorNames.size();
                     while (lit.hasNext()) {
                         String res = lit.next();
-                        if (count == 0)
+                        if (i == 0) {
                             answer.append(res);
+                            i++;
+                        }
                         else
-                            answer.append(" ,").append(lit);
+                            answer.append(" ,").append(res);
                         count++;
                     }
                 }
@@ -112,10 +118,13 @@ public class QuestionServiceImpl implements QuestionService {
                 paperNames = paperRepository.findByAuthorName(authorName);
                 if (paperNames != null) {
                     ListIterator<String> lit = paperNames.listIterator();
+                    count = paperNames.size();
                     while (lit.hasNext()) {
                         String res = lit.next();
-                        if (count == 0)
+                        if (i == 0) {
                             answer.append(res);
+                            i++;
+                        }
                         else
                             answer.append(" ,").append(res);
                         count++;
@@ -139,11 +148,19 @@ public class QuestionServiceImpl implements QuestionService {
                 // 论文id -> url
                 paperId = Integer.parseInt(reStrings.get(1));
                 url = paperRepository.findUrlById(paperId);
-                if (url != null)
+                if (url != null) {
                     answer.append(url);
+                    type = 1;
+                }
                 break;
             case 11:
-
+                // 论文title -> url
+                title.append(reStrings.get(1));
+                url = paperRepository.findUrlByTitle(title.toString());
+                if (url != null) {
+                    answer.append(url);
+                    type = 1;
+                }
                 break;
             case 12:
                 // 作者id -> 作者name
@@ -192,10 +209,13 @@ public class QuestionServiceImpl implements QuestionService {
                 journalNames = authorRepository.findJournalNameByName(authorName);
                 if (journalNames != null) {
                     ListIterator<String> lit = journalNames.listIterator();
+                    count = journalNames.size();
                     while (lit.hasNext()) {
                         String res = lit.next();
-                        if (count == 0)
+                        if (i == 0) {
                             answer.append(res);
+                            i++;
+                        }
                         else
                             answer.append(" ;").append(res);
                         count++;
@@ -203,42 +223,46 @@ public class QuestionServiceImpl implements QuestionService {
                 }
                 break;
             case 20:
+                // 报刊name -> 报刊url
+                journalName = reStrings.get(1);
+                url = journalRepository.findUrlByName(journalName);
+                if (url != null) {
+                    answer.append(url);
+                    type = 1;
+                }
+                break;
+            case 21:
                 // 作者id -> 报刊name
                 authorId = Integer.parseInt(reStrings.get(1));
                 journalNames = authorRepository.findJournalNameById(authorId);
                 if (journalNames != null) {
+                    count = journalNames.size();
                     ListIterator<String> lit = journalNames.listIterator();
+                    count = journalNames.size();
                     while (lit.hasNext()) {
                         String res = lit.next();
-                        if (count == 0)
+                        if (i == 0) {
                             answer.append(res);
+                            i++;
+                        }
                         else
                             answer.append(" ;").append(res);
                         count++;
                     }
                 }
                 break;
-            case 21:
-                // 报刊name -> 报刊url
-                journalName = reStrings.get(1);
-                url = journalRepository.findUrlByName(journalName);
-                if (url != null)
-                    answer.append(url);
-                break;
             default:
                 break;
         }
 
-        String finalAnswer = answer.toString();
-        System.out.println(finalAnswer);
-        if (!finalAnswer.equals("") && !finalAnswer.equals("\n")) {
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("result", finalAnswer);
-            String js = JSONObject.toJSONString(map);
-            System.out.println(js);
-            return js;
-        } else {
-            return "sorry,我没有找到你要的答案";
+        if (answer == null || "null".equals(answer.toString()) || "".equals(answer.toString())) {
+            answer.replace(0, answer.length(), "");
+            answer.append("sorry,我没有找到你要的答案");
         }
+        String finalAnswer = answer.toString();
+        Map<String, String> map = new HashMap<>();
+        map.put("result", finalAnswer);
+        map.put("tp", String.valueOf(type));
+        return JSONObject.toJSONString(map);
     }
 }

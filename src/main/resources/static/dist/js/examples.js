@@ -22,12 +22,30 @@ $(function () {
                 type: "get",
                 async: "true",
                 success: function (data) {
-
-
-                  message = data.result.toString();
-
+                  message = data.result;
+                  var tp = data.tp;
                   let date = new Date();
-                  hi = dateFormat("YYYY-mm-dd HH:MM", date),
+                  hi = dateFormat("YYYY-mm-dd HH:MM", date);
+                  if (tp == 1) {
+                    $('.layout .content .chat .chat-body .messages').append(
+                      `<div class="message-item ` + type + `">
+                        <div class="message-avatar">
+                            <figure class="avatar">
+                                <img src="./dist/media/img/` + ('cortana.jpg') + `" class="rounded-circle">
+                            </figure>
+                            <div>
+                                <h5>` + (type == 'outgoing-message' ? 'User sama' : 'Cortana') + `</h5>
+                                <div class="time">` + hi + ` ` + ('') + `</div>
+                            </div>  
+<!-- 添加变量的神秘语法-->
+                        </div>
+                        <div class="message-content">
+                        <a href = ` + data.result + ` target="_blank">
+                            ` + data.result + `
+                             </a>
+                        </div>
+                    </div>`);
+                  } else {
 
                     $('.layout .content .chat .chat-body .messages').append(
                       `<div class="message-item ` + type + `">
@@ -45,7 +63,7 @@ $(function () {
                             ` + message + ` 
                         </div>
                     </div>`);
-
+                  }
                 },
                 error: function () {
 
@@ -144,7 +162,6 @@ $(function () {
 
 $(document).ready(function () {
 
-
   message = "晚上好，我是您聪明能干的助手。";
 
   let date = new Date();
@@ -165,6 +182,23 @@ $(document).ready(function () {
                             ` + message + `
                         </div>
                     </div>`);
+
+  // $.ajax
+  // ({
+
+  //     url: "http://192.168.6.5:8080/question/answer/"+"作者33644033的名字叫什么",
+  //     dataType: "json",
+  //     type: "get",
+  //     async:"true",
+  //     success:function(data){
+
+  //     },
+  //     error:function(){
+
+
+  //     },
+  // }
+
 });
 
 function dateFormat(fmt, date) {
